@@ -44,7 +44,7 @@ class YouTube:
         vid_found = False
         vid_candidates = []
         viewcounts = []
-        artist_name,song_name = query.split(" - ")
+        artist_name,song_name = query.split(" - ", 1)
         for item in response["items"]:
             # print("SEARCH RESULT:", item["id"])
             if item["id"]["kind"] == "youtube#video" and not any(
