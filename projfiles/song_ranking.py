@@ -46,9 +46,9 @@ def find_best_match(vids, viewcounts, artist_name, song_name):
         elif "official audio" in title:
             currScore += 1
         elif "official video" in title:
-            currScore += 4
+            currScore += 5
         elif "official" in title:
-            currScore += 2
+            currScore += 3
         if "slowed + reverb" in title:
             currScore -= 10
         elif "slowed" in title and not "slowed" in song_name:

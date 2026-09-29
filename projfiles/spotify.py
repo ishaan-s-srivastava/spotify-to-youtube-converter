@@ -161,7 +161,6 @@ class Spotify:
 
         # Paginate through all pages using the 'next' URL
         while data.get("next"):
-            print("Fetching next page...")
             response = requests.get(data["next"], headers=headers)
             response.raise_for_status()
             data = response.json()
