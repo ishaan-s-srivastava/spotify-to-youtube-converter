@@ -148,15 +148,24 @@ class Spotify:
         response.raise_for_status()
 
         return response.json()
-    
+
     def access_playlist(self, chosen_plst):
-        response = requests.get(
-            "https://api.spotify.com/v1/playlists/" + chosen_plst["id"] + "/items",
-            headers={
-                "Authorization": f"Bearer {self.access_token}"
-            }
-        )
+        url = f"https://api.spotify.com/v1/playlists/{chosen_plst['id']}/items"
+        headers = {"Authorization": f"Bearer {self.access_token}"}
 
+        response = requests.get(url, headers=headers)
         response.raise_for_status()
+        data = response.json()
 
-        return response.json()
+        items = data.get("items", [])
+
+        # Paginate through all pages using the 'next' URL
+        while data.get("next"):
+            print("Fetching next page...")
+            response = requests.get(data["next"], headers=headers)
+            response.raise_for_status()
+            data = response.json()
+            items.extend(data.get("items", []))
+
+        data["items"] = items
+        return data

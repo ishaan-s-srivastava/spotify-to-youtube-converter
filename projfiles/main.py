@@ -122,6 +122,7 @@ def find_starting_point(plst, tracksinfo):
 
 playlist_id, tracksinfo = find_existing()
 
+
      
 for song in tracksinfo:
     video_id = ""
